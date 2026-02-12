@@ -1,99 +1,58 @@
- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Letter From My Heart</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<title>My Book</title>
 
 <style>
 body{
     margin:0;
     height:100vh;
-    background:linear-gradient(135deg,#1e1e3f,#5f4bb6);
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:'Poppins',sans-serif;
+    background:#2b1055;
+    font-family:Arial;
 }
 
-/* Book */
 .book{
+    width:350px;
+    height:450px;
     position:relative;
-    width:400px;
-    height:500px;
-    perspective:2000px;
+    perspective:1500px;
 }
 
-/* Pages */
 .page{
-    position:absolute;
     width:100%;
     height:100%;
-    background:#fffaf3;
-    border-radius:10px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.4);
+    position:absolute;
+    background:white;
     transform-origin:left;
-    transform-style:preserve-3d;
     transition:transform 1s;
-}
-
-/* Front + Back of page */
-.front, .back{
-    position:absolute;
-    width:100%;
-    height:100%;
-    padding:30px;
-    box-sizing:border-box;
     backface-visibility:hidden;
+    border-radius:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    padding:20px;
+    box-sizing:border-box;
 }
 
-.back{
-    transform:rotateY(180deg);
-}
-
-/* Flipped state */
 .page.flipped{
     transform:rotateY(-180deg);
 }
 
-/* Cover style */
 .cover{
     background:#4b2c5e;
     color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:'Great Vibes',cursive;
-    font-size:32px;
+    font-size:22px;
     cursor:pointer;
 }
-
-/* Text */
-h2{
-    font-family:'Great Vibes',cursive;
-    margin-bottom:20px;
-}
-
-p{
-    font-size:15px;
-    line-height:1.6;
-}
-
-/* Button */
 button{
     margin-top:20px;
-    padding:8px 18px;
-    border:none;
-    background:#4b2c5e;
-    color:white;
-    border-radius:20px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#2e1a3b;
+    padding:8px 15px;
 }
 </style>
 </head>
@@ -102,80 +61,32 @@ button:hover{
 
 <div class="book">
 
-    <!-- Cover -->
-    <div class="page" id="page0" style="z-index:5;">
-        <div class="front cover" onclick="flipPage(0)">
-            Click To Open 🤍
-        </div>
-        <div class="back"></div>
-    </div>
+<div class="page cover" id="p0" style="z-index:4;" onclick="flip(0)">
+Click To Open
+</div>
 
-    <!-- Page 1 -->
-    <div class="page" id="page1" style="z-index:4;">
-        <div class="front">
-            <h2>Page 1</h2>
-            <p>
-                Hey… I’m really sorry.  
-                Sometimes I struggle to speak about how I truly feel.  
-                Every time I try, it feels like it becomes too much for people…  
-                and then they slowly walk away, leaving me standing there alone.
-            </p>
-            <button onclick="flipPage(1)">Next ➜</button>
-        </div>
-        <div class="back"></div>
-    </div>
+<div class="page" id="p1" style="z-index:3;">
+<h3>Page 1</h3>
+<p>Hey… I’m really sorry. Sometimes I struggle to speak about how I truly feel.</p>
+<button onclick="flip(1)">Next</button>
+</div>
 
-    <!-- Page 2 -->
-    <div class="page" id="page2" style="z-index:3;">
-        <div class="front">
-            <h2>Page 2</h2>
-            <p>
-                I don’t really know how to open my heart.  
-                I’ve always been told to keep my feelings to myself.  
-                So now, when something hurts, I stay quiet.  
-                I listen to sad songs because they say the things I don’t know how to say.
-            </p>
-            <button onclick="flipPage(2)">Next ➜</button>
-        </div>
-        <div class="back"></div>
-    </div>
+<div class="page" id="p2" style="z-index:2;">
+<h3>Page 2</h3>
+<p>I don’t know how to open my heart. I’ve always been told to keep my feelings inside.</p>
+<button onclick="flip(2)">Next</button>
+</div>
 
-    <!-- Page 3 -->
-    <div class="page" id="page3" style="z-index:2;">
-        <div class="front">
-            <h2>Page 3</h2>
-            <p>
-                I wish I knew how to talk without being afraid of losing people.  
-                I wish I could explain everything that happens inside me.  
-                But sometimes it just feels too heavy…  
-                because I try so hard to carry everyone else’s feelings,  
-                and I forget to carry my own.
-            </p>
-            <button onclick="flipPage(3)">Next ➜</button>
-        </div>
-        <div class="back"></div>
-    </div>
-
-    <!-- Page 4 -->
-    <div class="page" id="page4" style="z-index:1;">
-        <div class="front">
-            <h2>Page 4</h2>
-            <p>
-                If I ever make you mad, please tell me.  
-                If I ever make you sad, please tell me.  
-                I never want to hurt you.  
-                I just want to learn how to be better…  
-                and not lose the people who matter to me. 🤍
-            </p>
-        </div>
-        <div class="back"></div>
-    </div>
+<div class="page" id="p3" style="z-index:1;">
+<h3>Page 3</h3>
+<p>If I ever hurt you, please tell me. I never want to lose you.</p>
+</div>
 
 </div>
 
 <script>
-function flipPage(pageNumber){
-    document.getElementById("page" + pageNumber).classList.add("flipped");
+function flip(num){
+    document.getElementById("p"+num).classList.add("flipped");
 }
 </script>
 
