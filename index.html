@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Why I Can't Open Up</title>
+<title>For Angel 🤍</title>
 
 <style>
 body{
@@ -11,49 +11,87 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#1e1e3f;
-    font-family:Arial;
+    background:linear-gradient(135deg,#1e1e3f,#4b2c5e);
+    font-family:Arial, sans-serif;
+    overflow:hidden;
 }
 
+/* Book */
 .book{
-    width:320px;
-    height:420px;
+    width:340px;
+    height:460px;
     position:relative;
-    perspective:1500px;
+    perspective:2500px;
 }
 
+/* Pages */
 .page{
     width:100%;
     height:100%;
     position:absolute;
     background:white;
     transform-origin:left;
-    transition:transform 1s;
-    backface-visibility:hidden;
-    border-radius:8px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.4);
-    padding:20px;
+    transform-style:preserve-3d;
+    transition:transform 1s ease;
+    border-radius:10px;
+    padding:25px;
     box-sizing:border-box;
+    backface-visibility:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+    overflow:auto;
+}
+
+/* Real paper shadow while flipping */
+.page::after{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:50px;
+    height:100%;
+    background:linear-gradient(to left, rgba(0,0,0,0.25), transparent);
+    opacity:0;
+    transition:opacity 1s;
+    border-radius:0 10px 10px 0;
+}
+
+.page.flipping::after{
+    opacity:1;
 }
 
 .page.flipped{
     transform:rotateY(-180deg);
 }
 
+/* Cover */
 .cover{
-    background:#4b2c5e;
+    background:linear-gradient(145deg,#2b1055,#3e1f75);
     color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:20px;
+    text-align:center;
+    font-size:22px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* Button */
+button{
+    margin-top:15px;
+    padding:8px 15px;
+    border:none;
+    background:#2b1055;
+    color:white;
+    border-radius:20px;
     cursor:pointer;
 }
 
-button{
-    margin-top:20px;
-    padding:8px 15px;
+/* Text */
+h3{
+    margin-top:0;
 }
+
 </style>
 </head>
 
@@ -61,32 +99,69 @@ button{
 
 <div class="book">
 
-<div class="page cover" id="p0" style="z-index:4;" onclick="flip(0)">
+<!-- Cover -->
+<div class="page cover" id="p0" style="z-index:5;" onclick="flip(0)">
+For Angel 🤍<br><br>
 Tap To Open
 </div>
 
-<div class="page" id="p1" style="z-index:3;">
+<!-- Page 1 -->
+<div class="page" id="p1" style="z-index:4;">
 <h3>Page 1</h3>
-<p>Hey… I’m really sorry. Sometimes I struggle to speak about how I truly feel.</p>
+<p>
+Hey Angel… I’m really sorry. I know sometimes I seem quiet or distant, and I know that can be confusing. 
+The truth is, I struggle to speak about how I truly feel. Every time I try to open up, it feels like my emotions become too heavy for people. 
+I start overthinking every word, wondering if I am saying too much or not enough. 
+Sometimes it feels easier to stay silent than to risk being misunderstood.
+</p>
 <button onclick="flip(1)">Next</button>
 </div>
 
-<div class="page" id="p2" style="z-index:2;">
+<!-- Page 2 -->
+<div class="page" id="p2" style="z-index:3;">
 <h3>Page 2</h3>
-<p>I was always told to keep my feelings to myself. So now I stay quiet even when it hurts.</p>
+<p>
+I was always told to keep my feelings to myself. To be strong. To not let emotions show too much. 
+So I learned how to hide things. I learned how to smile even when something inside me hurt. 
+Music became my escape. Sad songs say the words I cannot bring myself to say out loud. 
+They understand the parts of me that I don’t know how to explain.
+</p>
 <button onclick="flip(2)">Next</button>
 </div>
 
-<div class="page" id="p3" style="z-index:1;">
+<!-- Page 3 -->
+<div class="page" id="p3" style="z-index:2;">
 <h3>Page 3</h3>
-<p>If I ever make you sad, please tell me. I never want to lose you.</p>
+<p>
+Sometimes everything feels heavy because I try so hard to carry everyone else’s problems. 
+I try to be the strong one. I try to be the listener. But I forget that I also need someone to understand me. 
+I wish I knew how to open up without being afraid that once people see how deep my feelings are, 
+they might slowly walk away.
+</p>
+<button onclick="flip(3)">Next</button>
+</div>
+
+<!-- Page 4 -->
+<div class="page" id="p4" style="z-index:1;">
+<h3>Page 4</h3>
+<p>
+If I ever make you mad, please tell me. If I ever make you sad, please tell me. 
+I never want to hurt you without knowing it. I am still learning how to express myself in a healthy way. 
+I am still learning that my feelings matter too. I don’t want to lose you, Angel. 
+I just need patience while I learn how to lower my walls without feeling like I’ll be left alone again.
+</p>
 </div>
 
 </div>
 
 <script>
 function flip(num){
-    document.getElementById("p"+num).classList.add("flipped");
+    let page = document.getElementById("p"+num);
+    page.classList.add("flipping");
+    setTimeout(() => {
+        page.classList.remove("flipping");
+        page.classList.add("flipped");
+    }, 500);
 }
 </script>
 
